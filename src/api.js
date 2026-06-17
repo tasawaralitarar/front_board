@@ -1,4 +1,4 @@
-const API_URL = "http://BACKEND_PUBLIC_IP:8080";
+const API_URL = "http://18.209.22.39:8080";
 
 export async function getOrders() {
   const res = await fetch(`${API_URL}/api/orders`);

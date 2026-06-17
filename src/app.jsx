@@ -1,54 +1,49 @@
-import { useEffect, useState } from "react";
-import { getOrders } from "./api";
-import "./App.css";
+import { useEffect, useState } from 'react'
+import { getOrders } from './api'
+import './App.css'
 
 function App() {
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState([])
 
   const loadOrders = async () => {
     try {
-      const data = await getOrders();
-
-      const readyOrders = data.filter(
-        (o) =>
-          o.orderStatus === "完成" ||
-          o.orderStatus === "提供可能" ||
-          o.orderStatus === "READY"
-      );
-
-      setOrders(readyOrders);
+      const data = await getOrders()
+      setOrders(data)
     } catch (err) {
-      console.log(err);
+      console.error(err)
     }
-  };
+  }
 
   useEffect(() => {
-    loadOrders();
+    loadOrders()
 
     const timer = setInterval(() => {
-      loadOrders();
-    }, 3000);
+      loadOrders()
+    }, 5000)
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <div className="container">
-      <h1>ORDER BOARD</h1>
+      <h1>注文掲示板 (Order Board)</h1>
 
       <div className="board">
         {orders.length === 0 ? (
-          <h2>No Ready Orders</h2>
+          <h2>No Orders</h2>
         ) : (
           orders.map((order) => (
-            <div key={order.orderNo} className="card">
-              {order.orderNo}
+            <div className="card" key={order.orderNo}>
+              <h2>{order.orderNo}</h2>
+              <p>端末: {order.terminalNo}</p>
+              <p>状態: {order.orderStatus}</p>
+              <p>合計: ¥{order.totalAmount}</p>
             </div>
           ))
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
