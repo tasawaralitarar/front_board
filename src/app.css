@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  background: #111;
+  color: white;
+}
+
+.container {
+  text-align: center;
+  padding: 40px;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.card {
+  background: #222;
+  padding: 40px;
+  border-radius: 20px;
+  font-size: 50px;
+  font-weight: bold;
+}
